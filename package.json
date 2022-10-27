@@ -1,0 +1,19 @@
+{
+  "name": "dots-v2-node",
+  "version": "1.0.0",
+  "description": "Node SDK for Dots API V2",
+  "main": "index.ts",
+  "author": "Kartikye Mittal",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Send-Dots/dots-v2-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Send-Dots/dots-v2-node/issues"
+  },
+  "homepage": "https://github.com/Send-Dots/dots-v2-node#readme"
+}
