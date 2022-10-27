@@ -6,9 +6,9 @@ import type { payout_request } from '../models/payout_request';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 
-export class PayoutRequests {
+export class PayoutRequestsService {
 
-  constructor(public readonly httpRequest: BaseHttpRequest) { }
+  constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
    * Create a Payout Request
@@ -18,29 +18,32 @@ export class PayoutRequests {
    * @throws ApiError
    */
   public createPayoutsRequest(
-    requestBody?: {
-      /**
-       * The amount in cents to pay the user.
-       */
-      amount: number;
-      /**
-       * The user's id. `user_id` or `payee` is required.
-       */
-      user_id?: string | null;
-      /**
-       * The payee's phone number. `user_id` or `payee` is required.
-       */
-      payee?: any | null;
-      /**
-       * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
-       */
-      metadata?: string | any | null;
-      /**
-       * Add a memo to payout request
-       */
-      memo?: string;
-    },
-  ): CancelablePromise<payout_request> {
+requestBody?: {
+/**
+ * The amount in cents to pay the user.
+ */
+amount: number;
+/**
+ * The user's id. `user_id` or `payee` is required.
+ */
+user_id?: string;
+/**
+ * The payee's phone number. `user_id` or `payee` is required.
+ */
+payee?: {
+country_code: string;
+phone_number: string;
+};
+/**
+ * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+ */
+metadata?: string | any;
+/**
+ * Add a memo to payout request
+ */
+memo?: string;
+},
+): CancelablePromise<payout_request> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v2/payout-requests',
@@ -59,13 +62,13 @@ export class PayoutRequests {
    * @throws ApiError
    */
   public getPayoutRequests(
-    limit?: number,
-    startingAfter?: string,
-    endingBefore?: string,
-  ): CancelablePromise<{
-    has_more?: boolean;
-    data?: Array<payout_request>;
-  }> {
+limit?: number,
+startingAfter?: string,
+endingBefore?: string,
+): CancelablePromise<{
+has_more?: boolean;
+data?: Array<payout_request>;
+}> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v2/payout-requests',
@@ -85,8 +88,8 @@ export class PayoutRequests {
    * @throws ApiError
    */
   public getPayoutRequest(
-    payoutRequestId: string,
-  ): CancelablePromise<payout_request> {
+payoutRequestId: string,
+): CancelablePromise<payout_request> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v2/payout-requests/{payout_request_id}',

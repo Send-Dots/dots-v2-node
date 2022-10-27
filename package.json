@@ -1,6 +1,6 @@
 {
   "name": "dots-v2-node",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Node SDK for Dots API V2",
   "main": "index.ts",
   "author": "Kartikye Mittal",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Send-Dots/dots-v2-node/issues"
   },
-  "homepage": "https://github.com/Send-Dots/dots-v2-node#readme"
+  "homepage": "https://github.com/Send-Dots/dots-v2-node#readme",
+  "dependencies": {
+    "axios": "^1.1.3"
+  }
 }

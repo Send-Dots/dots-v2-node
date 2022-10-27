@@ -6,9 +6,9 @@ import type { payout_link } from '../models/payout_link';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 
-export class PayoutLinks {
+export class PayoutLinksService {
 
-  constructor(public readonly httpRequest: BaseHttpRequest) { }
+  constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
    * List all Payout Links
@@ -20,13 +20,13 @@ export class PayoutLinks {
    * @throws ApiError
    */
   public getPayoutLinks(
-    limit?: number,
-    startingAfter?: string,
-    endingBefore?: string,
-  ): CancelablePromise<{
-    has_more?: boolean;
-    data?: Array<payout_link>;
-  }> {
+limit?: number,
+startingAfter?: string,
+endingBefore?: string,
+): CancelablePromise<{
+has_more?: boolean;
+data?: Array<payout_link>;
+}> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v2/payout-links',
@@ -46,28 +46,40 @@ export class PayoutLinks {
    * @throws ApiError
    */
   public createPayoutLink(
-    requestBody?: {
-      /**
-       * The user's id.
-       */
-      user_id?: string | null;
-      /**
-       * The payee. This is optional.
-       */
-      payee?: any | null;
-      amount: number;
-      delivery?: any | null;
-      /**
-       * Force the collection of 1099 or W-8 information. Defaults to `false`.
-       */
-      force_collect_compliance_information?: boolean;
-      metadata?: string | any | null;
-      /**
-       * Add a memo to the top of the Payout Link
-       */
-      memo?: string;
-    },
-  ): CancelablePromise<payout_link> {
+requestBody?: {
+/**
+ * The user's id.
+ */
+user_id?: string;
+/**
+ * The payee. This is optional.
+ */
+payee?: {
+first_name?: string;
+last_name?: string;
+country_code?: string;
+phone_number?: string;
+email?: string;
+};
+amount: number;
+delivery?: {
+message?: string;
+/**
+ * Delivery method. `sms` requires `payee.country_code` and `payee.phone_number`, `email` required `payee.email`.
+ */
+method?: 'sms' | 'link' | 'email';
+};
+/**
+ * Force the collection of 1099 or W-8 information. Defaults to `false`.
+ */
+force_collect_compliance_information?: boolean;
+metadata?: string | any;
+/**
+ * Add a memo to the top of the Payout Link
+ */
+memo?: string;
+},
+): CancelablePromise<payout_link> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v2/payout-links',
@@ -84,8 +96,8 @@ export class PayoutLinks {
    * @throws ApiError
    */
   public getPayoutLink(
-    payoutLinkId: string,
-  ): CancelablePromise<payout_link> {
+payoutLinkId: string,
+): CancelablePromise<payout_link> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v2/payout-links/{payout_link_id}',
@@ -103,8 +115,8 @@ export class PayoutLinks {
    * @throws ApiError
    */
   public deletePayoutLink(
-    payoutLinkId: string,
-  ): CancelablePromise<payout_link> {
+payoutLinkId: string,
+): CancelablePromise<payout_link> {
     return this.httpRequest.request({
       method: 'DELETE',
       url: '/v2/payout-links/{payout_link_id}',

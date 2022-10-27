@@ -6,9 +6,9 @@ import type { transaction } from '../models/transaction';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 
-export class Transactions {
+export class TransactionsService {
 
-  constructor(public readonly httpRequest: BaseHttpRequest) { }
+  constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
    * List all Transactions
@@ -20,13 +20,13 @@ export class Transactions {
    * @throws ApiError
    */
   public getTransactions(
-    limit?: number,
-    startingAfter?: string,
-    endingBefore?: string,
-  ): CancelablePromise<{
-    has_more?: boolean;
-    data?: Array<transaction>;
-  }> {
+limit?: number,
+startingAfter?: string,
+endingBefore?: string,
+): CancelablePromise<{
+has_more?: boolean;
+data?: Array<transaction>;
+}> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v2/transactions',
@@ -46,8 +46,8 @@ export class Transactions {
    * @throws ApiError
    */
   public getTransaction(
-    transactionId: string,
-  ): CancelablePromise<transaction> {
+transactionId: string,
+): CancelablePromise<transaction> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v2/transactions/{transaction_id}',

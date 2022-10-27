@@ -3,31 +3,31 @@
 /* eslint-disable */
 import type { BaseHttpRequest } from './core/BaseHttpRequest';
 import type { OpenAPIConfig } from './core/OpenAPI';
-import { FetchHttpRequest } from './core/FetchHttpRequest';
+import { AxiosHttpRequest } from './core/AxiosHttpRequest';
 
-import { Flows } from './services/Flows';
-import { PayoutLinks } from './services/PayoutLinks';
-import { PayoutRequests } from './services/PayoutRequests';
-import { Payouts } from './services/Payouts';
-import { Transactions } from './services/Transactions';
-import { Transfers } from './services/Transfers';
-import { Users } from './services/Users';
+import { FlowsService } from './services/FlowsService';
+import { PayoutLinksService } from './services/PayoutLinksService';
+import { PayoutRequestsService } from './services/PayoutRequestsService';
+import { PayoutsService } from './services/PayoutsService';
+import { TransactionsService } from './services/TransactionsService';
+import { TransfersService } from './services/TransfersService';
+import { UsersService } from './services/UsersService';
 
 type HttpRequestConstructor = new (config: OpenAPIConfig) => BaseHttpRequest;
 
 export class Dots {
 
-  public readonly flows: Flows;
-  public readonly payoutLinks: PayoutLinks;
-  public readonly payoutRequests: PayoutRequests;
-  public readonly payouts: Payouts;
-  public readonly transactions: Transactions;
-  public readonly transfers: Transfers;
-  public readonly users: Users;
+  public readonly flows: FlowsService;
+  public readonly payoutLinks: PayoutLinksService;
+  public readonly payoutRequests: PayoutRequestsService;
+  public readonly payouts: PayoutsService;
+  public readonly transactions: TransactionsService;
+  public readonly transfers: TransfersService;
+  public readonly users: UsersService;
 
   public readonly request: BaseHttpRequest;
 
-  constructor(config?: Partial<OpenAPIConfig>, HttpRequest: HttpRequestConstructor = FetchHttpRequest) {
+  constructor(config?: Partial<OpenAPIConfig>, HttpRequest: HttpRequestConstructor = AxiosHttpRequest) {
     this.request = new HttpRequest({
       BASE: config?.BASE ?? 'https://api.dots.dev/api',
       VERSION: config?.VERSION ?? '1.0',
@@ -40,12 +40,12 @@ export class Dots {
       ENCODE_PATH: config?.ENCODE_PATH,
     });
 
-    this.flows = new Flows(this.request);
-    this.payoutLinks = new PayoutLinks(this.request);
-    this.payoutRequests = new PayoutRequests(this.request);
-    this.payouts = new Payouts(this.request);
-    this.transactions = new Transactions(this.request);
-    this.transfers = new Transfers(this.request);
-    this.users = new Users(this.request);
+    this.flows = new FlowsService(this.request);
+    this.payoutLinks = new PayoutLinksService(this.request);
+    this.payoutRequests = new PayoutRequestsService(this.request);
+    this.payouts = new PayoutsService(this.request);
+    this.transactions = new TransactionsService(this.request);
+    this.transfers = new TransfersService(this.request);
+    this.users = new UsersService(this.request);
   }
 }

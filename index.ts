@@ -18,10 +18,10 @@ export type { transfer } from './models/transfer';
 export type { user } from './models/user';
 export type { wallet } from './models/wallet';
 
-export { Flows } from './services/Flows';
-export { PayoutLinks } from './services/PayoutLinks';
-export { PayoutRequests } from './services/PayoutRequests';
-export { Payouts } from './services/Payouts';
-export { Transactions } from './services/Transactions';
-export { Transfers } from './services/Transfers';
-export { Users } from './services/Users';
+export { FlowsService } from './services/FlowsService';
+export { PayoutLinksService } from './services/PayoutLinksService';
+export { PayoutRequestsService } from './services/PayoutRequestsService';
+export { PayoutsService } from './services/PayoutsService';
+export { TransactionsService } from './services/TransactionsService';
+export { TransfersService } from './services/TransfersService';
+export { UsersService } from './services/UsersService';
