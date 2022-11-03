@@ -21,6 +21,7 @@ date_of_birth_collected?: boolean;
 '1099_collected'?: boolean;
 w8_ben_collected?: boolean;
 flagged?: boolean;
+id_verified?: boolean;
 };
   metadata?: string | any | null;
 };

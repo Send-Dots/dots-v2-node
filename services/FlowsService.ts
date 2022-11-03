@@ -50,7 +50,10 @@ requestBody?: {
 /**
  * A list of steps.
  */
-steps: Array<'compliance' | 'manage-payouts' | 'manage-payments' | 'payout'>;
+steps: Array<('compliance' | 'id-verification' | 'manage-payouts' | 'manage-payments' | 'payout' | {
+name: 'compliance' | 'id-verification' | 'manage-payouts' | 'manage-payments' | 'payout';
+auto_payout_enabled?: boolean;
+})>;
 /**
  * The user's id.
  */

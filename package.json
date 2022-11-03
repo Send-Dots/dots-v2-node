@@ -1,6 +1,6 @@
 {
   "name": "dots-v2-node",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Node SDK for Dots API V2",
   "main": "index.ts",
   "author": "Kartikye Mittal",
